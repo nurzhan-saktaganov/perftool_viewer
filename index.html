@@ -291,7 +291,9 @@
   }
 
   function OnLoadFile(content){
-    var lines = content.split("\r\n");
+    content = content.replace(/\r/g, '');
+    content = content.replace(/\n$/g, '');
+    var lines = content.split("\n");
     var csvBody = [];
     for (var i in lines){
       csvBody.push(lines[i].split(','));
