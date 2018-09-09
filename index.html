@@ -300,6 +300,22 @@
     }
     var csvHeaders = csvBody.shift();
 
+    // Sort by begin line
+    var beginLineColumnIndex;
+    for (var i in csvHeaders) {
+      var header = csvHeaders[i];
+      if (header === 'begin line') {
+        beginLineColumnIndex = i;
+        break;
+      }
+    }
+
+    csvBody.sort(function(rowA, rowB) {
+      var aBeginLine = rowA[beginLineColumnIndex];
+      var bBeginLine = rowB[beginLineColumnIndex];
+      return (aBeginLine < bBeginLine )? -1 : 1;
+    });
+
     intervals = [];
 
     for (var i in csvBody){
